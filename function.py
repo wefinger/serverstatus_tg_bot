@@ -5,7 +5,7 @@ import requests
 import base64
 import time
 from random import choice
-from config import JSON_URL
+from config import JSON_URL,V2_RSS_URL
 
 
 # 读取serverstatus节点信息，格式化输出
@@ -78,9 +78,9 @@ def get_node_details(node_name):
 # 读取订阅信息
 def get_v2(type="rand"):
     if type == "url":
-        return "订阅地址：https://free.sbgfw.xyz/rss/v2.html\n"
+        return "订阅地址：{}\n".format(V2_RSS_URL)
     else:
-        all_node = str(base64.b64decode(requests.get("https://free.sbgfw.xyz/rss/v2.html").text),'utf8').split("\n")
+        all_node = str(base64.b64decode(requests.get(V2_RSS_URL).text),'utf8').split("\n")
         return "随机节点：\n"+choice(all_node)+"\n获取全部节点请使用`url`参数"
 
 if __name__ == '__main__':
